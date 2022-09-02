@@ -33,8 +33,13 @@ placeholder(word);
 guessLetterButton.addEventListener("click", function (e) {
   // Prevent default reloading of page; form submission/ button click behavior
   e.preventDefault();
+  // Empty text of message element
+  message.innerText = "";
+  // Get what was entered in the input
   const guess = letterInput.value;
-  console.log(guess);
+  // Make sure a single letter was entered
+  const goodGuess = validateInput(guess);
+  
   letterInput.value = "";
 });
 
@@ -45,6 +50,7 @@ const validateInput = function (input) {
         message.innerText = "Please enter a letter.";
     } else if (input.length > 1) {
         message.innerText = "Please enter a single letter at once.";
+    // match() method works with reg ex to search strings (player inputs) to match it to the reg ex
     } else if (!input.match(acceptedLetter)) {
         message.innerText = "Please enter a letter a-z.";
     } else {
@@ -52,4 +58,3 @@ const validateInput = function (input) {
     }
 };
 
-// match() method works with reg ex to search strings (player inputs) to match it to the reg ex
