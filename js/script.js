@@ -17,6 +17,8 @@ const playAgainButton = document.querySelector(".play-again");
 
 // Starting word to test out the game
 const word = "magnolia";
+// Array to contain guessed letters
+const guessedLetters = [];
 
 // Display symbols as placeholders for the chosen word's letters
 const placeholder = function (word) {
