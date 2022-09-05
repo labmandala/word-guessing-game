@@ -22,27 +22,31 @@ const guessedLetters = [];
 
 // Display symbols as placeholders for the chosen word's letters
 const placeholder = function (word) {
-  const placeholderLetters = [];
-  for (const letter of word) {
-    console.log(letter);
-    placeholderLetters.push("●");
-  }
-  wordInProgress.innerText = placeholderLetters.join("");
+    const placeholderLetters = [];
+    for (const letter of word) {
+        console.log(letter);
+        placeholderLetters.push("●");
+    }
+    wordInProgress.innerText = placeholderLetters.join("");
 };
 
 placeholder(word);
 
 guessLetterButton.addEventListener("click", function (e) {
-  // Prevent default reloading of page; form submission/ button click behavior
-  e.preventDefault();
-  // Empty text of message element
-  message.innerText = "";
-  // Get what was entered in the input
-  const guess = letterInput.value;
-  // Make sure a single letter was entered
-  const goodGuess = validateInput(guess);
-  
-  letterInput.value = "";
+    // Prevent default reloading of page; form submission/ button click behavior
+    e.preventDefault();
+    // Empty text of message element
+    message.innerText = "";
+    // Get what was entered in the input
+    const guess = letterInput.value;
+    // Make sure a single letter was entered
+    const goodGuess = validateInput(guess);
+
+    if (goodGuess) {
+        // Guessing with acceptable letter
+        makeGuess(guess);
+    }
+    letterInput.value = "";
 });
 
 // Fx to validate the player's input as acceptable letters
@@ -52,7 +56,7 @@ const validateInput = function (input) {
         message.innerText = "Please enter a letter.";
     } else if (input.length > 1) {
         message.innerText = "Please enter a single letter at once.";
-    // match() method works with reg ex to search strings (player inputs) to match it to the reg ex
+        // match() method works with reg ex to search strings (player inputs) to match it to the reg ex
     } else if (!input.match(acceptedLetter)) {
         message.innerText = "Please enter a letter a-z.";
     } else {
@@ -60,3 +64,12 @@ const validateInput = function (input) {
     }
 };
 
+const makeGuess = function (guess) {
+    guess = guess.toUpperCase();
+    if (guessedLetters.includes(guess)) {
+        message.innerText = "Guess a different letter.";
+    } else {
+        guessedLetters.push(guess);
+        console.log(guessedLetters);
+    }
+};
