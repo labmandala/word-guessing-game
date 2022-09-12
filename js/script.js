@@ -71,8 +71,8 @@ const makeGuess = function (guess) {
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
-
         showGuessedLetters();
+        updateWordInProgress(guessedLetters);
     }
 };
 
@@ -92,5 +92,15 @@ const updateWordInProgress = function (guessedLetters) {
     const wordUpper = word.toUpperCase();
     // Split word string into array so letter appears in guessedLetters array
     const wordArray = wordUpper.split("");
-    wordArray();
+    // wordArray();
+    const revealWord = []; // New array with updated characters
+    for (const letter of wordArray) {
+      if (guessedLetters.includes(letter)) {
+        revealWord.push(letter.toUpperCase());
+      } else {
+        revealWord.push("●");
+      }
+    }
+    // console.log(revealWord);
+    wordInProgress.innerText = revealWord.join("");
 };
