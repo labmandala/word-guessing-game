@@ -76,6 +76,7 @@ const makeGuess = function (guess) {
     }
 };
 
+// Function to show the guessed letters
 const showGuessedLetters = function () {
     // First clear the list
     guessedLettersElement.innerHTML = "";
@@ -84,4 +85,12 @@ const showGuessedLetters = function () {
         li.innerText = letter;
         guessedLettersElement.append(li);
     }
+};
+
+// Function to update the word in progress, replaces dot placeholder with letter
+const updateWordInProgress = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    // Split word string into array so letter appears in guessedLetters array
+    const wordArray = wordUpper.split("");
+    wordArray();
 };
