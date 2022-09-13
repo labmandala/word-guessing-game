@@ -103,4 +103,13 @@ const updateWordInProgress = function (guessedLetters) {
     }
     // console.log(revealWord);
     wordInProgress.innerText = revealWord.join("");
+    checkIfWin();
+};
+
+// Check if player won, display congratulatory message
+const checkIfWin = function () {
+ if (word.toUpperCase() === wordInProgress.innerText ) {
+    message.classList.add("win");
+    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+ }
 };
