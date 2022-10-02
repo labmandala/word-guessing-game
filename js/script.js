@@ -31,20 +31,21 @@ const getWord = async function () {
     const randomIndex = Math.floor(Math.random() * wordArray.length);
     // Pull random word, remove whitespace, reassign word to this
     word = wordArray[randomIndex].trim();
-    placeholder(word);
-  };
+    placeholder(word); 
+};
+
+// Fire off the game
+getWord();
 
 // Display symbols as placeholders for the chosen word's letters
 const placeholder = function (word) {
     const placeholderLetters = [];
     for (const letter of word) {
-        console.log(letter);
+        // console.log(letter);
         placeholderLetters.push("●");
     }
     wordInProgress.innerText = placeholderLetters.join("");
 };
-
-placeholder(word);
 
 guessLetterButton.addEventListener("click", function (e) {
     // Prevent default reloading of page; form submission/ button click behavior
