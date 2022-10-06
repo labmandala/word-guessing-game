@@ -157,3 +157,17 @@ const startOver = function () {
     guessedLettersElement.classList.add("hide");
     playAgainButton.classList.remove("hide");
 };
+
+playAgainButton.addEventListener("click", function () {
+    // reset all original values - grab new word
+    message.classList.remove("win");
+    guessedLetters = [];
+    remainingGuesses = 8;
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    guessedLettersElement.innerHTML = "";
+    message.innerText = "";
+    // Grab a new word
+    getWord();
+
+});
+
