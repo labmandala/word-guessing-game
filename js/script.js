@@ -12,7 +12,9 @@ let guessedLetters = [];
 let remainingGuesses = 8;
 
 const getWord = async function () {
-  const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+  const response = await fetch(
+    "https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt"
+  );
   const words = await response.text();
   const wordArray = words.split("\n");
   const randomIndex = Math.floor(Math.random() * wordArray.length);
@@ -115,7 +117,7 @@ const updateGuessesRemaining = function (guess) {
   }
 
   if (remainingGuesses === 0) {
-    message.innerHTML = `Game over. The word was <span class="highlight">${word}</span>.`;
+    message.innerHTML = `<p class="highlight lose">Game over. The word was <span class="highlight"> ${word}</span></p>`;
     startOver();
   } else if (remainingGuesses === 1) {
     remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
@@ -127,7 +129,7 @@ const updateGuessesRemaining = function (guess) {
 const checkIfWin = function () {
   if (word.toUpperCase() === wordInProgress.innerText) {
     message.classList.add("win");
-    message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+    message.innerHTML = `<p class="highlight win">You guessed the correct word! Congrats!</p>`; 
 
     startOver();
   }
@@ -157,3 +159,27 @@ playAgainButton.addEventListener("click", function () {
   remainingGuessesElement.classList.remove("hide");
   guessedLettersElement.classList.remove("hide");
 });
+
+// ==== Dark/Light Theme Support ====
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}
+
+// Initialize theme from localStorage or system preference
+(function () {
+  const stored = localStorage.getItem("theme");
+  if (stored) {
+    setTheme(stored);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    setTheme("dark");
+  } else {
+    setTheme("light");
+  }
+})();
+
+// Toggle theme
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme");
+  setTheme(current === "dark" ? "light" : "dark");
+}
