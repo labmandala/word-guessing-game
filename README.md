@@ -6,4 +6,4 @@
 
 <p>Play the game here: https://labmandala.github.io/word-guessing-game/ </p>
 
-<img src=img/word-gessing-game.png/>
+<img src=img/word-guessing-game.jpg/>
